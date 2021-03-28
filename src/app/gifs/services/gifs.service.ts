@@ -12,9 +12,14 @@ export class GifsService {
   }
 
   searchedGifs(query: string) {
-    if(!query.trim) return;
+    const itemAlreadyExists = this._historic.includes(query)
+    const isBlankOrEmpty = !query.trim()
+
+    if(isBlankOrEmpty || itemAlreadyExists) return;
+
+    query = query.trim().toLocaleLowerCase()
 
     this._historic.unshift(query)
-    console.log(this._historic)
+    this._historic = this._historic.splice(0, 10)
   }
 }
