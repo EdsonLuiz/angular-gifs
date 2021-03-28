@@ -5,5 +5,16 @@ import { Injectable } from '@angular/core';
 })
 export class GifsService {
 
-  constructor() { }
+  private _historic: string[] = [];
+
+  get historic() {
+    return [...this._historic];
+  }
+
+  searchedGifs(query: string) {
+    if(!query.trim) return;
+
+    this._historic.unshift(query)
+    console.log(this._historic)
+  }
 }
